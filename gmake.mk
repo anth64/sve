@@ -47,20 +47,20 @@ server: $(BIN_DIR)/debug/$(SERVER_FULL_BIN)
 # Debug Rules
 $(BIN_DIR)/debug/$(CLIENT_FULL_BIN): $(CLIENT_DEBUG_OBJS)
 	@$(call MKDIR,$(@D))
-	$(CC) -o $@ $^ -lstk $(LDFLAGS_PLAT)
+	$(CC) -o $@ $^ $(LDFLAGS_CLIENT) $(LDFLAGS_PLAT)
 
 $(BIN_DIR)/debug/$(SERVER_FULL_BIN): $(SERVER_DEBUG_OBJS)
 	@$(call MKDIR,$(@D))
-	$(CC) -o $@ $^ -lstk $(LDFLAGS_PLAT)
+	$(CC) -o $@ $^ $(LDFLAGS_SERVER) $(LDFLAGS_PLAT)
 
 # Release Rules
 $(BIN_DIR)/release/$(CLIENT_FULL_BIN): $(CLIENT_RELEASE_OBJS)
 	@$(call MKDIR,$(@D))
-	$(CC) $(RELEASE_LDFLAGS) -o $@ $^ -lstk $(LDFLAGS_PLAT)
+	$(CC) $(RELEASE_LDFLAGS) -o $@ $^ $(LDFLAGS_CLIENT) $(LDFLAGS_PLAT)
 
 $(BIN_DIR)/release/$(SERVER_FULL_BIN): $(SERVER_RELEASE_OBJS)
 	@$(call MKDIR,$(@D))
-	$(CC) $(RELEASE_LDFLAGS) -o $@ $^ -lstk $(LDFLAGS_PLAT)
+	$(CC) $(RELEASE_LDFLAGS) -o $@ $^ $(LDFLAGS_SERVER) $(LDFLAGS_PLAT)
 
 # Compile Rules
 obj/debug/%.o: %.c
