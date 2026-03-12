@@ -1,5 +1,5 @@
-#include <sve/platform.h>
-#include <sve/sve.h>
+#include "platform.h"
+#include "sve.h"
 
 int main(int argc, char *argv[])
 {

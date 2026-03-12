@@ -1,5 +1,5 @@
 #define _POSIX_C_SOURCE 199309L
-#include <sve/platform.h>
+#include "platform.h"
 
 #if defined(_WIN32)
 #include <windows.h>
