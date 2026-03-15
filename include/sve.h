@@ -10,8 +10,32 @@ extern "C" {
 #define SVE_INIT_SUCCESS 0
 #define SVE_INIT_FAILURE 1
 
+typedef enum {
+	SVE_VIDEO_FULLSCREEN = 0x01,
+	SVE_VIDEO_VSYNC = 0x02,
+	SVE_VIDEO_BORDERLESS = 0x04,
+	SVE_VIDEO_SOFTWARE = 0x08,
+	SVE_VIDEO_RESIZABLE = 0x10,
+	SVE_VIDEO_HIGHDPI = 0x20,
+	SVE_VIDEO_GRAB_MOUSE = 0x40,
+} sve_video_flags_t;
+
+typedef struct {
+	uint16_t window_width;
+	uint16_t window_height;
+	uint16_t render_width;
+	uint16_t render_height;
+	uint16_t max_fps;
+	sve_video_flags_t flags;
+} sve_video_config_t;
+
 typedef struct {
 	uint8_t tick_rate;
+} sve_engine_config_t;
+
+typedef struct {
+	sve_engine_config_t engine;
+	sve_video_config_t video;
 } sve_config_t;
 
 sve_config_t sve_config_default(void);
