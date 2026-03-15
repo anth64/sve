@@ -10,11 +10,14 @@ extern "C" {
 #define SVE_INIT_SUCCESS 0
 #define SVE_INIT_FAILURE 1
 
-#define SVE_TICK_RATE 35
-#define SVE_TICK_NS (1000000000ULL / SVE_TICK_RATE)
+typedef struct {
+	uint8_t tick_rate;
+} sve_config_t;
 
-uint8_t sve_init(void);
+sve_config_t sve_config_default(void);
+uint8_t sve_init(sve_config_t config);
 void sve_tick(void);
+uint64_t sve_tick_ns(void);
 void sve_shutdown(void);
 
 #ifdef __cplusplus
