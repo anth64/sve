@@ -1,3 +1,9 @@
+ifeq ($(OS),Windows_NT)
+    PLATFORM_SRC := src/platform/win32.c
+else
+    PLATFORM_SRC := src/platform/posix.c
+endif
+
 include config.mk
 
 ifeq ($(OS),Windows_NT)
@@ -17,6 +23,7 @@ else
     RMDIR = rm -rf $(1)
 endif
 
+LINK_STK        := -Wl,-Bstatic -lstk -Wl,-Bdynamic
 RELEASE_LDFLAGS := -s
 CFLAGS_BASE     := -Wall -Wpedantic -I$(INC_DIR) -std=c99 $(CFLAGS_PLAT)
 
@@ -44,25 +51,22 @@ release: \
 client: $(BIN_DIR)/debug/$(CLIENT_FULL_BIN)
 server: $(BIN_DIR)/debug/$(SERVER_FULL_BIN)
 
-# Debug Rules
 $(BIN_DIR)/debug/$(CLIENT_FULL_BIN): $(CLIENT_DEBUG_OBJS)
 	@$(call MKDIR,$(@D))
-	$(CC) -o $@ $^ $(LDFLAGS_CLIENT) $(LDFLAGS_PLAT)
+	$(CC) -o $@ $^ $(LINK_STK) $(LDFLAGS_CLIENT) $(LDFLAGS_PLAT)
 
 $(BIN_DIR)/debug/$(SERVER_FULL_BIN): $(SERVER_DEBUG_OBJS)
 	@$(call MKDIR,$(@D))
-	$(CC) -o $@ $^ $(LDFLAGS_SERVER) $(LDFLAGS_PLAT)
+	$(CC) -o $@ $^ $(LINK_STK) $(LDFLAGS_PLAT)
 
-# Release Rules
 $(BIN_DIR)/release/$(CLIENT_FULL_BIN): $(CLIENT_RELEASE_OBJS)
 	@$(call MKDIR,$(@D))
-	$(CC) $(RELEASE_LDFLAGS) -o $@ $^ $(LDFLAGS_CLIENT) $(LDFLAGS_PLAT)
+	$(CC) $(RELEASE_LDFLAGS) -o $@ $^ $(LINK_STK) $(LDFLAGS_CLIENT) $(LDFLAGS_PLAT)
 
 $(BIN_DIR)/release/$(SERVER_FULL_BIN): $(SERVER_RELEASE_OBJS)
 	@$(call MKDIR,$(@D))
-	$(CC) $(RELEASE_LDFLAGS) -o $@ $^ $(LDFLAGS_SERVER) $(LDFLAGS_PLAT)
+	$(CC) $(RELEASE_LDFLAGS) -o $@ $^ $(LINK_STK) $(LDFLAGS_PLAT)
 
-# Compile Rules
 obj/debug/%.o: %.c
 	@$(call MKDIR,$(@D))
 	$(CC) $(CFLAGS_BASE) -g -O0 -MMD -MP -c $< -o $@

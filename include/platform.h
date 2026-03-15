@@ -7,8 +7,9 @@ extern "C" {
 
 #include <stdint.h>
 
-uint64_t sve_time_ms(void);
-void sve_sleep_ms(uint64_t ms);
+void sve_platform_init(void);
+uint64_t sve_time_ns(void);
+void sve_sleep_ns(uint64_t ns);
 
 #ifdef __cplusplus
 }

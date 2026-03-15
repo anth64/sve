@@ -11,18 +11,18 @@ int main(int argc, char *argv[])
 	if (sve_init() != SVE_INIT_SUCCESS)
 		return 1;
 
-	last = sve_time_ms();
+	last = sve_time_ns();
 
 	while (running) {
-		now = sve_time_ms();
+		now = sve_time_ns();
 		elapsed = now - last;
 
-		if (elapsed >= SVE_TICK_MS) {
+		if (elapsed >= SVE_TICK_NS) {
 			sve_tick();
 			/* TODO: networking, world update */
 			last = now;
 		} else {
-			sve_sleep_ms(SVE_TICK_MS - elapsed);
+			sve_sleep_ns(SVE_TICK_NS - elapsed);
 		}
 	}
 

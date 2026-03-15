@@ -6,12 +6,9 @@ BIN_DIR  = bin
 CLIENT_BIN = sve
 SERVER_BIN = sve_server
 
-LDFLAGS_CLIENT = -lstk -lSDL3
-LDFLAGS_SERVER = -lstk
-
 ENGINE_SRCS = \
     src/sve.c \
-    src/platform.c
+    $(PLATFORM_SRC)
 
 CLIENT_SRCS = src/client/main.c
 SERVER_SRCS = src/server/main.c

@@ -1,5 +1,5 @@
-#ifndef SVE_SVE_H
-#define SVE_SVE_H
+#ifndef SVE_H
+#define SVE_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -11,7 +11,7 @@ extern "C" {
 #define SVE_INIT_FAILURE 1
 
 #define SVE_TICK_RATE 35
-#define SVE_TICK_MS (1000 / SVE_TICK_RATE)
+#define SVE_TICK_NS (1000000000ULL / SVE_TICK_RATE)
 
 uint8_t sve_init(void);
 void sve_tick(void);
@@ -21,4 +21,4 @@ void sve_shutdown(void);
 }
 #endif
 
-#endif /* SVE_SVE_H */
+#endif /* SVE_H */
