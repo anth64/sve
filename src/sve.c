@@ -1,9 +1,11 @@
 #include "sve.h"
+#include "platform.h"
 #include <stdio.h>
 #include <stk/stk.h>
 
 uint8_t sve_init(void)
 {
+	sve_platform_init();
 	if (stk_init() != STK_INIT_SUCCESS) {
 		fprintf(stderr, "sve: failed to initialize stk\n");
 		return SVE_INIT_FAILURE;
