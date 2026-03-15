@@ -53,7 +53,7 @@ server: $(BIN_DIR)/debug/$(SERVER_FULL_BIN)
 
 $(BIN_DIR)/debug/$(CLIENT_FULL_BIN): $(CLIENT_DEBUG_OBJS)
 	@$(call MKDIR,$(@D))
-	$(CC) -o $@ $^ $(LINK_STK) $(LDFLAGS_CLIENT) $(LDFLAGS_PLAT)
+	$(CC) -o $@ $^ $(LINK_STK) -lSDL3 $(LDFLAGS_PLAT)
 
 $(BIN_DIR)/debug/$(SERVER_FULL_BIN): $(SERVER_DEBUG_OBJS)
 	@$(call MKDIR,$(@D))
@@ -61,7 +61,7 @@ $(BIN_DIR)/debug/$(SERVER_FULL_BIN): $(SERVER_DEBUG_OBJS)
 
 $(BIN_DIR)/release/$(CLIENT_FULL_BIN): $(CLIENT_RELEASE_OBJS)
 	@$(call MKDIR,$(@D))
-	$(CC) $(RELEASE_LDFLAGS) -o $@ $^ $(LINK_STK) $(LDFLAGS_CLIENT) $(LDFLAGS_PLAT)
+	$(CC) $(RELEASE_LDFLAGS) -o $@ $^ $(LINK_STK) -lSDL3 $(LDFLAGS_PLAT)
 
 $(BIN_DIR)/release/$(SERVER_FULL_BIN): $(SERVER_RELEASE_OBJS)
 	@$(call MKDIR,$(@D))
