@@ -35,7 +35,7 @@ CLIENT_RELEASE_OBJS := $(ALL_CLIENT_SRCS:%.c=obj/release/%.o)
 SERVER_DEBUG_OBJS   := $(ALL_SERVER_SRCS:%.c=obj/debug/%.o)
 SERVER_RELEASE_OBJS := $(ALL_SERVER_SRCS:%.c=obj/release/%.o)
 
-PREFIX ?= /usr/local
+PREFIX ?= /usr
 
 .PHONY: all debug release client server install uninstall clean
 all: debug
