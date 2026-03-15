@@ -8,7 +8,7 @@ SERVER_BIN = sve_server
 
 ENGINE_SRCS = \
     src/sve.c \
-    $(PLATFORM_SRC)
+    $(OS_SRC)
 
 CLIENT_SRCS = src/client/main.c
 SERVER_SRCS = src/server/main.c

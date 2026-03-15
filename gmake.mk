@@ -1,7 +1,11 @@
 ifeq ($(OS),Windows_NT)
-    PLATFORM_SRC := src/platform/win32.c
+    OS_SRC    := src/platform/os/win32.c
+    VIDEO_SRC := src/platform/video/sdl.c
+    INPUT_SRC := src/platform/input/sdl.c
 else
-    PLATFORM_SRC := src/platform/posix.c
+    OS_SRC    := src/platform/os/posix.c
+    VIDEO_SRC := src/platform/video/sdl.c
+    INPUT_SRC := src/platform/input/sdl.c
 endif
 
 include config.mk
@@ -27,7 +31,7 @@ LINK_STK        := -Wl,-Bstatic -lstk -Wl,-Bdynamic
 RELEASE_LDFLAGS := -s
 CFLAGS_BASE     := -Wall -Wpedantic -I$(INC_DIR) -std=c99 $(CFLAGS_PLAT)
 
-ALL_CLIENT_SRCS := $(CLIENT_SRCS) $(ENGINE_SRCS)
+ALL_CLIENT_SRCS := $(CLIENT_SRCS) $(ENGINE_SRCS) $(VIDEO_SRC) $(INPUT_SRC)
 ALL_SERVER_SRCS := $(SERVER_SRCS) $(ENGINE_SRCS)
 
 CLIENT_DEBUG_OBJS   := $(ALL_CLIENT_SRCS:%.c=obj/debug/%.o)

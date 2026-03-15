@@ -1,4 +1,6 @@
-PLATFORM_SRC = src/platform/posix.c
+OS_SRC    = src/platform/os/posix.c
+VIDEO_SRC = src/platform/video/sdl.c
+INPUT_SRC = src/platform/input/sdl.c
 
 .include "config.mk"
 
@@ -10,10 +12,10 @@ CFLAGS_PLAT  = -I/usr/local/include
 CFLAGS_BASE  = -Wall -Wpedantic -I${.CURDIR}/${INC_DIR} -std=c99 ${CFLAGS_PLAT}
 LINK_STK     = -Wl,-Bstatic -lstk -Wl,-Bdynamic
 
-ALL_CLIENT_SRCS = ${CLIENT_SRCS} ${ENGINE_SRCS}
+ALL_CLIENT_SRCS = ${CLIENT_SRCS} ${ENGINE_SRCS} ${VIDEO_SRC} ${INPUT_SRC}
 ALL_SERVER_SRCS = ${SERVER_SRCS} ${ENGINE_SRCS}
 
-ALL_SRCS = ${CLIENT_SRCS} ${SERVER_SRCS} ${ENGINE_SRCS}
+ALL_SRCS = ${CLIENT_SRCS} ${SERVER_SRCS} ${ENGINE_SRCS} ${VIDEO_SRC} ${INPUT_SRC}
 
 CLIENT_DEBUG_OBJS   = ${ALL_CLIENT_SRCS:S/.c$/.o/:S/^/${.CURDIR}\/obj\/debug\//}
 CLIENT_RELEASE_OBJS = ${ALL_CLIENT_SRCS:S/.c$/.o/:S/^/${.CURDIR}\/obj\/release\//}

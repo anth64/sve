@@ -7,7 +7,7 @@ extern "C" {
 
 #include <stdint.h>
 
-void sve_platform_init(void);
+void sve_platform_init(void (*signal_handler)(void));
 uint64_t sve_time_ns(void);
 void sve_sleep_ns(uint64_t ns);
 
